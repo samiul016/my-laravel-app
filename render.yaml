@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: hrms-app
+    env: docker
+    plan: free # or starter
+    region: singapore # best for Bangladesh
+    envVars:
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: hrms-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: hrms-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: hrms-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: hrms-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: hrms-db
+          property: password
+
+databases:
+  - name: hrms-db
+    plan: free # or starter
+    region: singapore
